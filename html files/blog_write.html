@@ -1,0 +1,87 @@
+<html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <style>
+        /* contact section starts here */
+        .contact {
+          display: flex;
+          flex-direction: row;
+          color: green;
+          margin: 1in 1in 1in 1in;
+          padding: 1in 1in 1in 1in;
+          border: 1px solid;
+        }
+        .contact li a{
+          display: flex;
+          flex-direction: column;
+          text-decoration: none;
+          color: green;
+        /*   text-align: center; */
+          position: relative;
+          left: 1in;
+          top: 1in;
+          padding: 0 0 1cm 10px;
+        }
+        .contact li form{
+          display: flex;
+          flex-direction: column;
+          width: 100%;
+          
+        }
+        .contact li{
+          display: inline-block;
+        }
+        
+        .contact form input{
+              width: 100%;
+          padding: 12px 20px;
+          margin: 8px 0;
+          display: inline-block;
+          border: 1px solid #ccc;
+          border-radius: 10px;
+          box-sizing: border-box;
+        }
+        input[type=submit]{
+          background-color: yellow;
+        }
+        input[type=submit]:hover {
+          background-color: green;
+          border: 0px solid none;
+          transform: scale(1.05);
+         }
+        
+        .blog_body{
+            padding: 0 0 10px 10px;
+            border: 1px solid;
+        }
+        .blog_body li{
+            padding-bottom: 2rem;
+        }
+        
+            </style>
+            <title>Document</title>
+        </head>
+        <body>
+            <div id="contact" class="contact">
+                <li><form id="form" action="/create-blog" method="POST">
+                  <h2>Blog</h2>
+                  <input name="heading" type="text" placeholder="Heading" id="email">
+                  <input name="blog_body" type="textarea" placeholder="Blog body">
+                  <input type="submit" id="submit">
+                  </form>
+                </li> 
+                </div>
+              
+        
+                <div class="blog_body">
+                    ${myBlog.map(function(anyName){
+                        return `<li>${anyName.heading}</li>
+                        <li>${anyName.blog_body} </li>
+                        <button>Edit</button>
+                        <button>Delete</button>`
+                    }).join('')}
+                </div>
+        </body>
+        </html>
