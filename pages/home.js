@@ -1,6 +1,5 @@
-let db
-const axios = require('axios');
-const {express, app, nodemailer, mongodb, connectionString} = require('../server')
+
+const {axios, express, app, nodemailer, mongodb, connectionString} = require('../server')
 // this line tells express to automatically take asynchronous request data and add it to req object
 mongodb.connect(connectionString, {useNewUrlParser: true}, function(err, client){
     db = client.db()
