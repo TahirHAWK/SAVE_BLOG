@@ -1,12 +1,8 @@
-
-const {axios, express, app, nodemailer, mongodb, connectionString} = require('../server')
-const {transporter} = require('./authentication')
+const {axios, express, app, nodemailer, mongodb, connectionString} = require('./dependencies')
+let {databaseConnection} = require('../db')
 
 // this line tells express to automatically take asynchronous request data and add it to req object
-mongodb.connect(connectionString, {useNewUrlParser: true}, function(err, client){
-    db = client.db()
-    
-})
+
 app.use(express.json())
 // this line tells express to automatically take submitted form data and add it to request object
 app.use(express.urlencoded({extended: false}))
@@ -14,6 +10,7 @@ app.use(express.static('public'))
 // dependencies that are needed to run the codes below
 
 
+const {transporter} = require('./authentication')
 let contactEmail = function(req, res){
     let mail_subject = req.body.email;
     let mail_body = req.body.feedback;

@@ -1,4 +1,4 @@
-const {axios, express, app, nodemailer, mongodb, connectionString} = require('../server')
+const {axios, express, app, nodemailer, mongodb, connectionString} = require('./dependencies')
 
 let transporter = nodemailer.createTransport({
     service: 'hotmail',
