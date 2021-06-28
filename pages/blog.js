@@ -24,6 +24,7 @@ let editBlog = function(req, res){
     })
    
   }
+
  
 let showBlogOnly = function(req, res) {
     db.collection('myBlog').find().sort({"_id": -1}).toArray(function(err, myBlog){
@@ -44,16 +45,15 @@ let showBlogOnly = function(req, res) {
       <title>SAVE HSTU</title>
     </head>
     <body>
-      <header id="header">
-        <nav id="nav-bar">
-        <li><img id="header-img" src="https://scontent.fdac12-1.fna.fbcdn.net/v/t1.6435-9/121596169_132300508620920_9118668398298529590_n.png?_nc_cat=111&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=6vhFEV8-APgAX84vwQy&tn=Uf6FDVnbHUU-zVXl&_nc_ht=scontent.fdac12-1.fna&oh=0429cdcf44b30e04d3c4c59228f8eaff&oe=60DB4149" alt="save logo" class="logo"></li>
-        <li><a class="nav-link" href="#home">Home</a></li>
-        <li><a class="nav-link" href="#activities">Our Activities</a></li>
-        <li><a class="nav-link" href="#contact">Contact</a></li>
-          
-        </nav>
-      </header>
-    
+    <header id="header">
+    <nav id="nav-bar">
+    <li><a href="/index"><img id="header-img" src="https://scontent.fdac12-1.fna.fbcdn.net/v/t1.6435-9/121596169_132300508620920_9118668398298529590_n.png?_nc_cat=111&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=6vhFEV8-APgAX84vwQy&tn=Uf6FDVnbHUU-zVXl&_nc_ht=scontent.fdac12-1.fna&oh=0429cdcf44b30e04d3c4c59228f8eaff&oe=60DB4149" alt="save logo" class="logo"></a></li>
+    <li><a class="nav-link" href="/">Home</a></li>
+    <li><a class="nav-link" href="/blog">Our Activities</a></li>
+    <li><a class="nav-link" href="/contact">Contact</a></li>
+      
+    </nav>
+  </header>
     
       
           ${myBlog.map(function(anyName){
@@ -97,7 +97,7 @@ let showBlogOnly = function(req, res) {
         </footer>
         
       </div>
-      <script src='https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js'></script>
+      
     </body>
     </html>
     <!-- partial -->

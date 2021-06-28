@@ -1,3 +1,49 @@
+nav {
+  display: flex;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  padding: 20px 20px 20px 20px;
+  justify-content: space-between;
+  background-color: var(black);
+  color: white;
+  width: 100%;
+  z-index: 10;
+  
+}
+@media(max-width: 700px) {
+  nav{
+  flex-direction: column;
+  }
+}
+
+.nav-link {
+  color: white;
+  text-decoration: none;
+}
+nav li {
+  display: inline-block;
+  padding: 20px 50px 10px 20px;
+  border-radius: 13px;
+  }
+nav li:hover{
+   background-color: yellow;
+ 
+  
+}
+ nav li:hover a{
+  color: green;
+   letter-spacing: 2px;
+}
+.logo {
+  max-width: 50px;
+  clip-path: circle(50% at 50% 50%);
+  
+}
+
+
+/* nav bar code finished here */
+
 /* contact section starts here */
 .contact {
     display: flex;

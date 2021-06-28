@@ -43,6 +43,15 @@ let contactPage = function(req, res){
       <title>Email</title>
   </head>
   <body>
+  <header id="header">
+  <nav id="nav-bar">
+  <li><a href="/index"><img id="header-img" src="https://scontent.fdac12-1.fna.fbcdn.net/v/t1.6435-9/121596169_132300508620920_9118668398298529590_n.png?_nc_cat=111&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=6vhFEV8-APgAX84vwQy&tn=Uf6FDVnbHUU-zVXl&_nc_ht=scontent.fdac12-1.fna&oh=0429cdcf44b30e04d3c4c59228f8eaff&oe=60DB4149" alt="save logo" class="logo"></a></li>
+  <li><a class="nav-link" href="/">Home</a></li>
+  <li><a class="nav-link" href="/blog">Our Activities</a></li>
+  <li><a class="nav-link" href="/contact">Contact</a></li>
+    
+  </nav>
+</header>
       <div id="contact" class="contact">
           <li><form id="form" action="/contact-email" method="POST">
             <h2>Contact us</h2>

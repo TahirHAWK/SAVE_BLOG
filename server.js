@@ -9,6 +9,9 @@ app.use(express.urlencoded({extended: false}))
 app.use(express.static('public'))
 // dependencies that are needed to run the codes below
 
+const {indexFile} = require('./pages/index')
+app.get('/index', indexFile)
+
 const {homefunction} = require('./pages/home')
 app.get('/', homefunction)
 // homepage functions ends here
