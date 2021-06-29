@@ -1,4 +1,9 @@
-
+const {axios, express, app, nodemailer, mongodb, connectionString} = require('./dependencies')
+app.use(express.json())
+// this line tells express to automatically take submitted form data and add it to request object
+app.use(express.urlencoded({extended: false}))
+app.use(express.static('../public'))
+// dependencies that are needed to run the codes below
 
 let indexFile = function(req, res){
     res.send(`<html lang="en">
@@ -15,7 +20,7 @@ let indexFile = function(req, res){
     <nav id="nav-bar">
     <li><a href="/index"><img id="header-img" src="https://scontent.fdac12-1.fna.fbcdn.net/v/t1.6435-9/121596169_132300508620920_9118668398298529590_n.png?_nc_cat=111&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=6vhFEV8-APgAX84vwQy&tn=Uf6FDVnbHUU-zVXl&_nc_ht=scontent.fdac12-1.fna&oh=0429cdcf44b30e04d3c4c59228f8eaff&oe=60DB4149" alt="save logo" class="logo"></a></li>
     <li><a class="nav-link" href="/">Home</a></li>
-    <li><a class="nav-link" href="/blog">Our Activities</a></li>
+    <li><a class="nav-link" href="/blog">Our Activities</a></li> 
     <li><a class="nav-link" href="/contact">Contact</a></li>
       
     </nav>

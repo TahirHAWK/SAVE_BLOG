@@ -26,6 +26,12 @@ let editBlog = function(req, res){
   }
 
  
+let deleteBlog = function(req, res){
+  db.collection('myBlog').deleteOne({_id: new mongodb.ObjectID(req.body.id)}, function(){
+    res.send("success")
+  })
+}
+
 let showBlogOnly = function(req, res) {
     db.collection('myBlog').find().sort({"_id": -1}).toArray(function(err, myBlog){
     res.send(`<!DOCTYPE html>
@@ -108,4 +114,4 @@ let showBlogOnly = function(req, res) {
     })
   }
 
-  module.exports = {createBlog, editBlog, showBlogOnly}
+  module.exports = {createBlog, editBlog, showBlogOnly, deleteBlog}

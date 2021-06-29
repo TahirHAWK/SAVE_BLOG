@@ -46,7 +46,7 @@ let homefunction = function(req, res){
                         return `<li class="heading" id="heading">${anyName.heading}</li>
                         <li class="blog_body" id="blog_body">${anyName.blog_body} </li>
                         <button data-id="${anyName._id}"  class="edit">Edit</button>
-                        <button>Delete</button>`
+                        <button data-id="${anyName._id}"  class="delete">Delete</button>`
                     }).join('')}
                 </div>
                 <script src="axios.min.js"></script>

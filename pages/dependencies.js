@@ -9,6 +9,6 @@ let connectionString = 'mongodb://localhost:27017/?readPreference=primary&appnam
 app.use(express.json())
 // this line tells express to automatically take submitted form data and add it to request object
 app.use(express.urlencoded({extended: false}))
-app.use(express.static('public'))
+app.use(express.static('../public'))
 // dependencies that are needed to run the codes below
 module.exports = {axios, express, app, nodemailer, mongodb, connectionString}
