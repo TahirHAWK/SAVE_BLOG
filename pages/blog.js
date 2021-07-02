@@ -1,6 +1,7 @@
 
 const {axios, express, app, nodemailer, mongodb, connectionString} = require('./dependencies')
 let {databaseConnection} = require('../db')
+const { Decimal128 } = require('mongodb')
 
 // this line tells express to automatically take asynchronous request data and add it to req object
 
@@ -17,9 +18,10 @@ let createBlog = function(req, res){
         res.redirect('/')
     })
   } 
-let editBlog = function(req, res){
+  let editBlog = function(req, res){
+  let blogID = new mongodb.ObjectID(req.body.id)
 
-    db.collection('myBlog').findOneAndUpdate({_id: new mongodb.ObjectID(req.body.id)}, {$set: {heading: req.body.heading, blog_body: req.body.blog_body}}, function(){
+    db.collection('myBlog').findOneAndUpdate({_id: blogID}, {$set: {heading: req.body.heading, blog_body: req.body.blog_body}}, function(){
       res.send("Success")
     })
    
@@ -29,6 +31,42 @@ let editBlog = function(req, res){
 let deleteBlog = function(req, res){
   db.collection('myBlog').deleteOne({_id: new mongodb.ObjectID(req.body.id)}, function(){
     res.send("success")
+  })
+}
+
+let singleBlog = function(req, res){
+  let idFromLink = req.params.id
+  // console.log({_id: idFromLink})
+  // let query = {_id: idFromLink}
+  db.collection('myBlog').find().toArray(function(err, myBlog){
+    // res.send(`
+    // ${myBlog.map(function(anyName){
+    //   return `<h1>${anyName.heading}</h1>
+    //   <p> ${anyName.blog_body}</p>   `
+    // }).join('')}
+    // `);
+    
+    function getHeading(item) {
+      if(item._id == idFromLink){
+        let heading = item.heading;
+        let blog_body = item.blog_body
+        
+        return [heading, blog_body]
+      }
+    }
+     
+    let x = 0
+    let TotalElementArray = myBlog.map(getHeading).length
+    console.log(TotalElementArray)
+    while(x < TotalElementArray){
+      if(myBlog.map(getHeading)[x]){
+        console.log(myBlog.map(getHeading)[x])
+         res.send(myBlog.map(getHeading)[x])
+
+      }
+     x++ 
+    } 
+
   })
 }
 
@@ -84,7 +122,7 @@ let showBlogOnly = function(req, res) {
             <h2>Opening a door to the future</h2>
             <p> ${anyName.blog_body}</p>
             <p class="read-more">
-              <a href="#">Read More</a>
+              <a href="/${anyName._id}">Read More</a>
               </p>
               </div>
             </div>
@@ -114,4 +152,4 @@ let showBlogOnly = function(req, res) {
     })
   }
 
-  module.exports = {createBlog, editBlog, showBlogOnly, deleteBlog}
+  module.exports = {createBlog, editBlog, singleBlog, showBlogOnly, deleteBlog}

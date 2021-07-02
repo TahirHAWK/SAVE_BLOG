@@ -16,12 +16,15 @@ const {homefunction} = require('./pages/home')
 app.get('/', homefunction)
 // homepage functions ends here
 
-const {createBlog, editBlog, showBlogOnly, deleteBlog} = require('./pages/blog')
+const {createBlog, editBlog, singleBlog, showBlogOnly, deleteBlog} = require('./pages/blog')
 app.post('/create-blog', createBlog)
 app.post('/edit-blog', editBlog)
 app.post('/delete-blog', deleteBlog)
 app.get('/blog', showBlogOnly)
+app.get('/:id', singleBlog)
 // blog functions ends here
+
+
 const {contactPage, contactEmail} = require('./pages/contact')
 app.get('/contact', contactPage)
 app.post('/contact-email', contactEmail, homefunction)
