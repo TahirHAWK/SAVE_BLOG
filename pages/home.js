@@ -49,13 +49,14 @@ let homefunction = function(req, res){
                         <button data-id="${anyName._id}"  class="delete">Delete</button>`
                     }).join('')}
                 </div>
-                <script src="axios.min.js"></script>
+                <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
 
                 <script src="/browserSide.js"></script>
         </body>
         </html>`)
     })
-    
+     
 }
 
 module.exports = {homefunction}

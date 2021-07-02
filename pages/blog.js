@@ -54,7 +54,7 @@ let singleBlog = function(req, res){
         return [heading, blog_body]
       }
     }
-     
+       
     let x = 0
     let TotalElementArray = myBlog.map(getHeading).length
     console.log(TotalElementArray)
