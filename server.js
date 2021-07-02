@@ -27,7 +27,9 @@ app.post('/create-blog', createBlog)
 app.post('/edit-blog', editBlog)
 app.post('/delete-blog', deleteBlog)
 app.get('/blog', showBlogOnly)
-app.get('/:id', singleBlog)     //I have no idea why, but if this line stays upwords somewhere, the other codes doesn't work, it gets timed out. Every any request gets executed, this one also does.
+app.get('/blog/:id', singleBlog)     
+//Problem: I have no idea why, but if this line stays upwords somewhere, the other codes doesn't work, it gets timed out. Every any request gets executed, this one also does.
+// solution: As it turns out, it was '/:id' instead of '/blog/:id', that's why any request is getting executed this one considers it as an id type string and gets executed again.
 
 // blog functions ends here
 
@@ -39,3 +41,6 @@ app.get('/:id', singleBlog)     //I have no idea why, but if this line stays upw
 
 // How it solved: just clean cache and cookies with Ccleaner, and then restart PC.
 
+// The error "Error: Can't set headers after they are sent." means that you're already in the Body or Finished state, but some function tried to set a header or statusCode. When you see this error, try to look for anything that tries to send a header after some of the body has already been written. For example, look for callbacks that are accidentally called twice, or any error that happens after the body is sent.
+
+// In your case, you called res.redirect(), which caused the response to become Finished. Then your code threw an error (res.req is null). and since the error happened within your actual function(req, res, next) (not within a callback), Connect was able to catch it and then tried to send a 500 error page. But since the headers were already sent, Node.js's setHeader threw the error that you saw.

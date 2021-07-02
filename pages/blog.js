@@ -55,10 +55,10 @@ let singleBlog = function(req, res){
         return [heading, blog_body]
       }
     }
-       
+        
     let x = 0
     let TotalElementArray = myBlog.length
-    
+    // here myBlog is an array which can be accessed myBlog[2] etc but when it comes to applying logic and conditions, it must use map because it writes a separate array for this and does its operation, myBlog is a fixed array and cannot be changed. But myBlog.map(anyMethod)[x] is a new array and can be changed.
     while(x < TotalElementArray){
       if(myBlog.map(getHeading)[x]){
         console.log(x)
@@ -126,7 +126,7 @@ let showBlogOnly = function(req, res) {
             <h2>Opening a door to the future</h2>
             <p> ${anyName.blog_body}</p>
             <p class="read-more">
-              <a href="/${anyName._id}">Read More</a>
+              <a href="/blog/${anyName._id}">Read More</a>
               </p>
               </div>
             </div>
