@@ -1,7 +1,7 @@
 
 const {axios, express, app, nodemailer, mongodb, connectionString} = require('./dependencies')
 let {databaseConnection} = require('../db')
-const { Decimal128 } = require('mongodb')
+
 
 // this line tells express to automatically take asynchronous request data and add it to req object
 
@@ -45,24 +45,26 @@ let singleBlog = function(req, res){
     //   <p> ${anyName.blog_body}</p>   `
     // }).join('')}
     // `);
+    // console.log(myBlog[2]._id)
+    console.log('Im here from Singleblog')
     
     function getHeading(item) {
       if(item._id == idFromLink){
         let heading = item.heading;
         let blog_body = item.blog_body
-        
         return [heading, blog_body]
       }
     }
        
     let x = 0
-    let TotalElementArray = myBlog.map(getHeading).length
-    console.log(TotalElementArray)
+    let TotalElementArray = myBlog.length
+    
     while(x < TotalElementArray){
       if(myBlog.map(getHeading)[x]){
-        console.log(myBlog.map(getHeading)[x])
-         res.send(myBlog.map(getHeading)[x])
-
+        console.log(x)
+        console.log(myBlog[x])
+         res.send(`<h1>${myBlog[x].heading} </h1><br>
+         Blog:<p> ${myBlog[x].blog_body}</p>`)
       }
      x++ 
     } 
@@ -71,6 +73,8 @@ let singleBlog = function(req, res){
 }
 
 let showBlogOnly = function(req, res) {
+  
+
     db.collection('myBlog').find().sort({"_id": -1}).toArray(function(err, myBlog){
     res.send(`<!DOCTYPE html>
     <html lang="en" >

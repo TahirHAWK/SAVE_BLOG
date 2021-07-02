@@ -29,9 +29,11 @@ let contactEmail = function(req, res){
          console.log('Email sent: ' + info.response);
        }
      });
-     res.redirect('/contact')
-   }
 
+     res.redirect('/contact')
+     
+   }
+ 
 let contactPage = function(req, res){
   res.send(`<html lang="en">
   <head>
