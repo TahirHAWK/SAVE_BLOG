@@ -18,6 +18,7 @@ let createBlog = function(req, res){
         res.redirect('/')
     })
   } 
+
   let editBlog = function(req, res){
   let blogID = new mongodb.ObjectID(req.body.id)
 
@@ -35,57 +36,50 @@ let deleteBlog = function(req, res){
 }
 
 let singleBlog = function(req, res){
-  let idFromLink = req.params.id
-  console.log('performing check if id is valid...')
-  if(ObjectId.isValid(idFromLink)){
-    console.log('Validation done, it works.')
-// console.log({_id: idFromLink})
-  // let query = {_id: idFromLink}
+    let idFromLink = req.params.id
+    console.log('performing check if it is valid...')
+    // here "ObjectId" is a mongodb function that provides "isValid" function by which we can check the single blog id requested by the user if it has the length of a valid mongodb ID or not. If yes the id will enter the database section and checked there if it exists or not.
+    if(ObjectId.isValid(idFromLink)){
+      console.log('Validation done, it works.')
   db.collection('myBlog').find().toArray(function(err, myBlog){
-    // res.send(`
-    // ${myBlog.map(function(anyName){
-    //   return `<h1>${anyName.heading}</h1>
-    //   <p> ${anyName.blog_body}</p>   `
-    // }).join('')}
-    // `);
-    let TotalElementArray = myBlog.length
-    for(let x = 0; x < TotalElementArray; x++){
-      if(myBlog[x]._id == idFromLink){
-        console.log("id matched " + x)
-        function getHeading(item) {
-          if(item._id == idFromLink){
-            let heading = item.heading;
-            let blog_body = item.blog_body
-            return [heading, blog_body]
-          }
-          
-        }
-             
-        let y = 0
-        // here myBlog is an array which can be accessed myBlog[2] etc but when it comes to applying logic and conditions, it must use map because it writes a separate array for this and does its operation, myBlog is a fixed array and cannot be changed. But myBlog.map(anyMethod)[x] is a new array and can be changed.
-        while(y <= TotalElementArray){
-          
-          if(myBlog.map(getHeading)[y]){
-             res.send(`<h1>${myBlog[y].heading} </h1><br>
-             Blog:<p> ${myBlog[y].blog_body}</p>`)
-                                        }
-              y++ 
-                                    }
+      let TotalElementArray = myBlog.length         // this is the length of the myBlog array which contains the data that are going to be displayed on a single post. 
+      for(let x = 0; x < TotalElementArray; x++){
+        // myBlog contains it as multiple objects inside an array. where to access each index, myBlog[index] is declared as x and for each index "object", there's an '_id' property that has to be compared with the user input id field.
+        if(myBlog[x]._id == idFromLink){
+          console.log("id matched on index " + x)
+          function getData(item) {
+            if(item._id == idFromLink){
+              let heading = item.heading;
+              let blog_body = item.blog_body
+              return [heading, blog_body]
+                                      }
+                          }   
+              // In the getData function it takes the data and forms an array with multiple object inside.
+              // here myBlog is an array which can be accessed myBlog[2] etc but when it comes to applying logic and conditions, it must use map because it writes a separate array for this and does its operation, myBlog is a fixed array and cannot be changed. But myBlog.map(anyMethod)[x] is a new array and can be changed.
+            let y = 0
+            // the getData function makes other arrays null except the one you're looking for, so while checking all the indexes here the only one will show output which contains the actual data while other array objects are being null.
+            while(y <= TotalElementArray){
+              if(myBlog.map(getData)[y]){
+                res.send(`<h1>${myBlog[y].heading} </h1><br>
+                Blog:<p> ${myBlog[y].blog_body}</p>`)
+                                          }
+                y++ 
+                                }
 
-        break;
+          break;
       }
-      else if (myBlog[x]._id !== idFromLink){
-        if(x == TotalElementArray-1){
-
-          console.log("doesnt exist !!!!")
-          res.send(`<h1>The page you're looking for doesn't exists. </h1>
-              <p>Go to <a href="/blog">Activities Page.</a></p>`)
+      // here if the '_id' value doesn't match with any of the database id it will come to this execution. here it will check multiple times untill the end the array. We cannot quit the execution untill we checked all the myBlog index objects.
+        else if (myBlog[x]._id !== idFromLink){
+          if(x == TotalElementArray-1){
+            console.log("doesnt exist !!!!")
+            res.send(`<h1>The page you're looking for doesn't exists. </h1>
+                    <p>Go to <a href="/blog">Activities Page.</a></p>`)
         } else if(x !== TotalElementArray) {
-          console.log("doesnt exist, but still need to check !!!!")
-          continue;
-        }
+            console.log("doesnt exist on this index of array, but still need to check !!!!")
+            continue;
+          }
 
-      } //end of else if
+        } //end of else if
     }  // end of for loop after entering database to check id
     
      
@@ -93,11 +87,11 @@ let singleBlog = function(req, res){
   })
   
   } // end of if statement of valid id
-  else {
-    console.log("Noting found")
-    res.send(`<h1>The page you're looking for doesn't exists. </h1>
-              <p>Go to <a href="/blog">Activities Page.</a></p>`)
-  }
+    else {// else if the id doesnt have the length of a valid id
+      console.log("Nothing found")
+      res.send(`<h1>The page you're looking for doesn't exists. </h1>
+                <p>Go to <a href="/blog">Activities Page.</a></p>`)
+    }
 }
  
 let showBlogOnly = function(req, res) {
