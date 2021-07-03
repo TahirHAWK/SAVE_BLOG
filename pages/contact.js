@@ -1,4 +1,4 @@
-const {axios, express, app, nodemailer, mongodb, connectionString} = require('./dependencies')
+const {axios, express, app, nodemailer, mongodb, ObjectId, connectionString} = require('./dependencies')
 let {databaseConnection} = require('../db')
 
 // this line tells express to automatically take asynchronous request data and add it to req object

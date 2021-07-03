@@ -1,5 +1,5 @@
 
-const {axios, express, app, nodemailer, mongodb, connectionString} = require('./dependencies')
+const {axios, express, app, nodemailer, mongodb, ObjectId, connectionString} = require('./dependencies')
 let {databaseConnection} = require('../db')
 
 
@@ -36,7 +36,10 @@ let deleteBlog = function(req, res){
 
 let singleBlog = function(req, res){
   let idFromLink = req.params.id
-  // console.log({_id: idFromLink})
+  console.log('performing check if id is valid...')
+  if(ObjectId.isValid(idFromLink)){
+    console.log('Validation done, it works.')
+// console.log({_id: idFromLink})
   // let query = {_id: idFromLink}
   db.collection('myBlog').find().toArray(function(err, myBlog){
     // res.send(`
@@ -45,33 +48,58 @@ let singleBlog = function(req, res){
     //   <p> ${anyName.blog_body}</p>   `
     // }).join('')}
     // `);
-    // console.log(myBlog[2]._id)
-    console.log('Im here from Singleblog')
-    
-    function getHeading(item) {
-      if(item._id == idFromLink){
-        let heading = item.heading;
-        let blog_body = item.blog_body
-        return [heading, blog_body]
-      }
-    }
-        
-    let x = 0
     let TotalElementArray = myBlog.length
-    // here myBlog is an array which can be accessed myBlog[2] etc but when it comes to applying logic and conditions, it must use map because it writes a separate array for this and does its operation, myBlog is a fixed array and cannot be changed. But myBlog.map(anyMethod)[x] is a new array and can be changed.
-    while(x < TotalElementArray){
-      if(myBlog.map(getHeading)[x]){
-        console.log(x)
-        console.log(myBlog[x])
-         res.send(`<h1>${myBlog[x].heading} </h1><br>
-         Blog:<p> ${myBlog[x].blog_body}</p>`)
+    for(let x = 0; x < TotalElementArray; x++){
+      if(myBlog[x]._id == idFromLink){
+        console.log("id matched " + x)
+        function getHeading(item) {
+          if(item._id == idFromLink){
+            let heading = item.heading;
+            let blog_body = item.blog_body
+            return [heading, blog_body]
+          }
+          
+        }
+             
+        let y = 0
+        // here myBlog is an array which can be accessed myBlog[2] etc but when it comes to applying logic and conditions, it must use map because it writes a separate array for this and does its operation, myBlog is a fixed array and cannot be changed. But myBlog.map(anyMethod)[x] is a new array and can be changed.
+        while(y <= TotalElementArray){
+          
+          if(myBlog.map(getHeading)[y]){
+             res.send(`<h1>${myBlog[y].heading} </h1><br>
+             Blog:<p> ${myBlog[y].blog_body}</p>`)
+                                        }
+              y++ 
+                                    }
+
+        break;
       }
-     x++ 
-    } 
+      else if (myBlog[x]._id !== idFromLink){
+        if(x == TotalElementArray-1){
+
+          console.log("doesnt exist !!!!")
+          res.send(`<h1>The page you're looking for doesn't exists. </h1>
+              <p>Go to <a href="/blog">Activities Page.</a></p>`)
+        } else if(x !== TotalElementArray) {
+          console.log("doesnt exist, but still need to check !!!!")
+          continue;
+        }
+
+      } //end of else if
+    }  // end of for loop after entering database to check id
+    
+     
 
   })
+  
+  } // end of if statement of valid id
+  else {
+    console.log("Noting found")
+    res.send(`<h1>The page you're looking for doesn't exists. </h1>
+              <p>Go to <a href="/blog">Activities Page.</a></p>`)
+  }
 }
-
+ 
 let showBlogOnly = function(req, res) {
   
 
