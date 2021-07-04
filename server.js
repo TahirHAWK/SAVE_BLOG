@@ -22,12 +22,20 @@ app.post('/contact-email', contactEmail)
 app.get('/contact', contactPage)
 // contact functions ends here
 
+
 const {createBlog, editBlog, singleBlog, showBlogOnly, deleteBlog} = require('./pages/blog')
 app.post('/create-blog', createBlog)
 app.post('/edit-blog', editBlog)
 app.post('/delete-blog', deleteBlog)
 app.get('/blog', showBlogOnly)
-app.get('/blog/:id', singleBlog)     
+app.get('/blog/:id', singleBlog)  
+// blog functions ends here
+
+// Test functions goes here
+const {testFunctionGet, testFunctionPost} = require('./pages/test')
+app.get('/test', testFunctionGet)
+app.post('/test-post', testFunctionPost)
+
 //Problem: I have no idea why, but if this line stays upwords somewhere, the other codes doesn't work, it gets timed out. Every any request gets executed, this one also does.
 // solution: As it turns out, it was '/:id' instead of '/blog/:id', that's why any request is getting executed this one considers it as an id type string and gets executed again.
 
