@@ -20,6 +20,8 @@ let testFunctionGet = function(req, res){
            <meta charset="UTF-8">
            <meta http-equiv="X-UA-Compatible" content="IE=edge">
            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <link rel="stylesheet" href="test.css">
+
            <title>Document</title>
        </head>
        <body>
@@ -33,8 +35,9 @@ let testFunctionGet = function(req, res){
 
                return `
 
-                   <li>${any.heading}<li>
-                   <li>${any.blog_body}<li>
+                   <li>${any.heading} <br>
+                   ${any.blog_body}
+                   </li>
                `
            }).join('')}
 

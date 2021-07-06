@@ -1,3 +1,7 @@
+*{
+  justify-content: center;
+  
+}
 nav {
   display: flex;
   position: fixed;
@@ -5,7 +9,7 @@ nav {
   left: 0px;
   padding: 20px 20px 20px 20px;
   justify-content: space-between;
-  background-color: var(black);
+  background-color: black;
   color: white;
   width: 100%;
   z-index: 10;
@@ -92,11 +96,31 @@ nav li:hover{
     transform: scale(1.05);
    }
   
-  .blog_body{
+   /* Blog body starts here */
+  .column{
       padding: 0 0 10px 10px;
-      border: 1px solid;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .column li{
+      display: block;
+      width: 50%;
+      border: 1px blueviolet solid;
+      padding: 10px 0 10px 10px;
+      margin: 10px 0 10px 10px;
+      text-align: center;
   }
-  .blog_body li{
-      padding-bottom: 2rem;
+  button {
+    padding: 10px 10px 10px 10px;
+    margin: 10px 10px 10px 10px;
+    border-radius: 10px;
+    width: 13rem;
+    color: whitesmoke;
+    background-color: blueviolet;
   }
+  
+
+
+
   
