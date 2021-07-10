@@ -43,16 +43,19 @@ let homefunction = function(req, res){
                 <div class="row">
                 <div class="column">
                     ${myBlog.map(function(anyName){
-                        return `<li class="heading" id="heading">Heading: ${anyName.heading}<br>Blog Body: ${anyName.blog_body} <br>
+                        return `
+                        <li class="heading" id="heading">Heading: ${anyName.heading}<br>Blog Body: ${anyName.blog_body} <br>
                         <button data-id="${anyName._id}"  class="edit">Edit</button>
                         <button data-id="${anyName._id}"  class="delete">Delete</button>
                         </li>
+                        
+                        
                         
                         `
                     }).join('')}
                 </div>
                 </div>
-                <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+                <script src="axios.min.js"></script>
 
 
                 <script src="/browserSide.js"></script>
