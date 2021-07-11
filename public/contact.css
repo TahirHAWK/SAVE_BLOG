@@ -52,7 +52,7 @@ nav li:hover{
 .contact {
     display: flex;
     flex-direction: row;
-    color: green;
+    color: blueviolet;
     margin: 1in 1in 1in 1in;
     padding: 1in 1in 1in 1in;
     border: 1px solid;
@@ -61,7 +61,7 @@ nav li:hover{
     display: flex;
     flex-direction: column;
     text-decoration: none;
-    color: green;
+    color: blueviolet;
     flex-wrap: wrap;
 
     position: relative;
@@ -91,12 +91,14 @@ nav li:hover{
     box-sizing: border-box;
   }
   input[type=submit]{
-    background-color: yellow;
+    background-color: blueviolet;
   }
   input[type=submit]:hover {
-    background-color: green;
+    background-color: rgb(89, 10, 163);
+    color: whitesmoke;
+    text-decoration: underline;
     border: 0px solid none;
-    transform: scale(1.05);
+    /* transform: scale(1.05); */
    }
   
    /* Blog body starts here */
@@ -120,16 +122,24 @@ nav li:hover{
       border: 1px blueviolet solid;
       padding: 10px 30 10px 30px;
       margin: 10px 0 10px 10px;
-        
-
-  }
+      
+    }
+    .column li:hover{  
+      border-radius: 5px;
+      box-shadow: 5px 10px #888888;
+     }
   button {
     padding: 10px 10px 10px 10px;
     margin: 10px 10px 10px 10px;
     border-radius: 10px;
-    width: 13rem;
+    width: 7rem;
     color: #f5f5f5;
     background-color: blueviolet;
+  }
+  button:hover {
+    color: #ffffff;
+    background-color: rgb(89, 10, 163);
+    text-decoration: underline;
   }
   
 

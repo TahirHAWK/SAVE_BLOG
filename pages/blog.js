@@ -43,7 +43,9 @@ let singleBlog = function(req, res){
       console.log('Validation done, it works.')
   db.collection('myBlog').find().toArray(function(err, myBlog){
       let TotalElementArray = myBlog.length         // this is the length of the myBlog array which contains the data that are going to be displayed on a single post. 
+      
       for(let x = 0; x < TotalElementArray; x++){
+
         // myBlog contains it as multiple objects inside an array. where to access each index, myBlog[index] is declared as x and for each index "object", there's an '_id' property that has to be compared with the user input id field.
         if(myBlog[x]._id == idFromLink){
           console.log("id matched on index " + x)

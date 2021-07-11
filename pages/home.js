@@ -12,6 +12,7 @@ app.use(express.static('public'))
 
 let homefunction = function(req, res){
     db.collection('myBlog').find().sort({"_id": -1}).toArray(function(err, myBlog){
+        
         res.send(`<html lang="en">
         <head>
             <meta charset="UTF-8">
@@ -43,8 +44,10 @@ let homefunction = function(req, res){
                 <div class="row">
                 <div class="column">
                     ${myBlog.map(function(anyName){
+                        
                         return `
-                        <li class="heading" id="heading">Heading: ${anyName.heading}<br>Blog Body: ${anyName.blog_body} <br>
+                        <li class="heading" id="heading">Heading: ${anyName.heading}<br><h6 style="color: blue; font-size: 10;">${ObjectId(anyName._id).getTimestamp()}</h6>
+                        <br>Blog Body: ${anyName.blog_body} <br>
                         <button data-id="${anyName._id}"  class="edit">Edit</button>
                         <button data-id="${anyName._id}"  class="delete">Delete</button>
                         </li>

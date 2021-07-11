@@ -31,6 +31,7 @@ let testFunctionGet = function(req, res){
        
            </form>
            
+           <li>${myBlog[0][1]}</li>
            ${myBlog.map(function(any){
 
                return `
@@ -60,7 +61,7 @@ function makeid(length) {
    return result;
 }
 
-console.log(makeid(5));
+console.log(makeid(5), 'executed automatically');
 
 let testFunctionPost = function(req, res){
 
