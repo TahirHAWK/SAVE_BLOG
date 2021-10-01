@@ -30,8 +30,7 @@ let testFunctionGet = function(req, res){
            <input type="submit" value="Click">
        
            </form>
-           
-           <li>${myBlog[0][1]}</li>
+        
            ${myBlog.map(function(any){
 
                return `

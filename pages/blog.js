@@ -104,7 +104,7 @@ let showBlogOnly = function(req, res) {
     <html lang="en" >
     <head>
       <meta charset="UTF-8">
-      <title>CodePen - Build_a_product_landing_page</title>
+      <title>Blog</title>
       <link rel="stylesheet" href="blog.css">
     </head>
     <body>
